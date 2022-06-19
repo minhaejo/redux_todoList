@@ -1,56 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import Input from './components/Input';
+
 import './App.css';
 
+import TodoItem from './components/TodoItem';
+import { useSelector } from 'react-redux';
+import { selectTodoList } from './features/todoSlice';
+
+
+
 function App() {
+  const todoList =useSelector(selectTodoList)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="app">
+      <div className='app__container'>
+      <div className='app__todoContainer'>
+        {todoList.map(item=>(
+         <TodoItem 
+         name={item.item} // item.item input이고 그걸 name이라는 props로 전달한거임 어디로? TodoItem의 p태그 내부.
+         done={item.done}
+         id={item.id}
+          />
+        ))
+        }
+        </div>  
+      <Input/>
+      </div>
     </div>
   );
 }
