@@ -11,6 +11,7 @@ import { selectTodoList } from './features/todoSlice';
 
 function App() {
   const todoList =useSelector(selectTodoList)
+  //useSelector은 이미 state를 알고있는 놈임
   return (
     <div className="app">
       <div className='app__container'>
