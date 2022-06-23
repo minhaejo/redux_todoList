@@ -3,6 +3,10 @@ import "./Input.css"
 import { useDispatch } from 'react-redux'
 import { saveTodo } from '../features/todoSlice'
 
+
+
+
+
 const Input = () => {
     const [input,setInput] = useState("")
     const dispatch = useDispatch() // 디스페치를 사용하겠다 그럼 액션이 있어야 하고 액션이 불리면 리듀서로 보냄 리듀서가 
@@ -19,13 +23,12 @@ const Input = () => {
     }
   return (
     <div className='input'>
-           <form onSubmit={(e)=>e.preventDefault()}>
+        <form onSubmit={(e)=>e.preventDefault()}>
         <input type="text" value={input} onChange={e=>setInput(e.target.value)} />
         <button onClick={addTodo}>Add!</button>
         </form>
     </div>
   )
 }
-
 export default Input
 

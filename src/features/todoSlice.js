@@ -6,6 +6,7 @@ const initialState = {
 }
 
 
+
 //reducer state의 값을 변경하기때문에 dispatch에 액션을 전달하면 리듀서호출 디스
 
 const todoSlice = createSlice({
@@ -20,6 +21,8 @@ const todoSlice = createSlice({
        },
 
        setCheck:(state,action)=>{
+        
+         //새로운 껍데기로 {} [] << [] !== [내부에선 새로운 한줄을 업데이트하는거]
          state.todoList.map(item => {
            if (action.payload === item.id) {
              if (item.done === true) {
@@ -30,25 +33,63 @@ const todoSlice = createSlice({
            } 
           })
        },
+       //왜 이따위로 동작함? 실패코드 1  왜자꾸 done이 undifiend로 뜨거나 트루여도 
+       // store에 state의 done은 바뀔 생각을 안하나
        setDelete:(state,action)=>{
-          const newState = state.todoList.filter(item => item.id !== action.payload.id)
-          state.todoList = newState;
-          console.log(state)
-       
-       } // 
-  }
-});
+         console.log(state.done)
+         if (state.done === undefined) {
+          state.done = true
+          if (state.done === true) {
+          const newState = state.todoList.filter(item => item.id !== action.payload)
+          state.todoList = newState
+          }
+         }else{
+           alert("체크되지 않은 항목은 삭제 할 수 없습니다.")
+         }
+       } 
+        }
+    });
+    
 
 
 
+      //실패코드2
 
+  //  setDelete:(state,action)=>{
+  //        if (setCheck.item.done == undefined) {
+  //         setCheck.item.done =true
+  //         if (setCheck.item.done == true) {
+  //         const newState = state.todoList.filter(item => item.id !== action.payload.id)
+  //         state.todoList = newState
+  //         }
+  //        }else{
+  //          alert("체크되지 않은 항목은 삭제 할 수 없습니다.")
+  //        }
+  //      } 
+  //     }
+  //   });
 
-export const {saveTodo,setCheck,setDelete} = todoSlice.actions
+      //실패코드2
 
-export const selectTodoList = state => state.todos.todoList // 이 줄 해석 안됨
+      //  setDelete:(state,action)=>{
+      //    if (state.todoList.done == undefined) {
+      //      state.todoList.done = true
+      //      if (state.todoList.done == true){
+      //          const newState = state.todoList.filter(item => item.id !== action.payload.id)
+      //     state.todoList = newState
+      //      }else{
+      //        alert("체크되지 않은 항목은 삭제 할 수 없습니다.")
+      //      }
+      //    }
+      //  }
 
-export default todoSlice.reducer // 얘가  todoReducer 왜 todoReducer지? 이유가 뭐지? potatoReducer로 받아도 동작함 
-//그럼 todos는 뭐임 도대체?';
+  export const {saveTodo,setCheck,setDelete} = todoSlice.actions
+
+  export const selectTodoList = state => state.todos.todoList // 이 줄 해석 안됨
+
+  export default todoSlice.reducer // 얘가  todoReducer 왜 todoReducer지? 이유가 뭐지? potatoReducer로 받아도 동작함
+
+  //그럼 todos는 뭐임 도대체?';
 
 
 
