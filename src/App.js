@@ -1,8 +1,6 @@
 import React from 'react';
 import Input from './components/Input';
-
 import './App.css';
-
 import TodoItem from './components/TodoItem';
 import { useSelector } from 'react-redux';
 import { selectTodoList } from './features/todoSlice';
@@ -21,6 +19,7 @@ function App() {
          name={item.item} // item.item input이고 그걸 name이라는 props로 전달한거임 어디로? TodoItem의 p태그 내부.
          done={item.done}
          id={item.id}
+         key={item.id}
           />
         ))
         }

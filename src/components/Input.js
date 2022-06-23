@@ -23,7 +23,6 @@ const Input = () => {
         <input type="text" value={input} onChange={e=>setInput(e.target.value)} />
         <button onClick={addTodo}>Add!</button>
         </form>
-
     </div>
   )
 }
