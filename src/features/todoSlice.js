@@ -36,17 +36,23 @@ const todoSlice = createSlice({
        //왜 이따위로 동작함? 실패코드 1  왜자꾸 done이 undifiend로 뜨거나 트루여도 
        // store에 state의 done은 바뀔 생각을 안하나
        setDelete:(state,action)=>{
-         console.log(state.done)
-         if (state.done === undefined) {
-          state.done = true
-          if (state.done === true) {
-          const newState = state.todoList.filter(item => item.id !== action.payload)
-          state.todoList = newState
-          }
+         
+         const item = action.payload 
+         console.log(item)
+         if (item.done) {
+           const newState = state.todoList.filter(todo => todo.id !== item.id)
+          state.todoList = newState;
          }else{
            alert("체크되지 않은 항목은 삭제 할 수 없습니다.")
          }
-       } 
+       } ,
+         setSelectAll:(state,action) => {
+              console.log(action.payload) // 콘솔을 찍어보니 payload는 객체라는 사실을 앎 그러니까 배열을 전달하면
+                                    //객체안에 배열인 구조로 {todoList:[이런 형식이라는 말임]}
+                                    //내가 하고싶은건 배열에서의 foreach를 돌려 item들을 순회하면서 done을 true로 하고싶음
+                                    //계속 시간 쓰니까 뭔가 꼬이는 느낌임
+                                    
+         }
         }
     });
     
@@ -83,7 +89,7 @@ const todoSlice = createSlice({
       //    }
       //  }
 
-  export const {saveTodo,setCheck,setDelete} = todoSlice.actions
+  export const {saveTodo,setCheck,setDelete,setSelectAll} = todoSlice.actions
 
   export const selectTodoList = state => state.todos.todoList // 이 줄 해석 안됨
 

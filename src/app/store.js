@@ -12,3 +12,4 @@ export const store = configureStore({
 //리액트 컴포넌트들 만듦
 //거기서 필요한 스테이트 관리해야하니까 그때 리듀서 만듦
 
+
