@@ -28,7 +28,8 @@ function App() {
         ))
         }
         </div>  
-        <Detail
+        <Detail 
+        id={todoList}
         />
       <Input/>
       </div>

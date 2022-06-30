@@ -106,7 +106,14 @@ const todoSlice = createSlice({
       }
     } ,
     setDeleteAll:(state,action) => {
-           
+          if(state.todoList.length === 0){
+            alert("todoList를 작성해주세요.")
+          }else{
+          const newState = state.todoList.filter(item=>item.done !== true)
+          state.todoList = newState
+          }
+      
+          
           // const newState =  state.todoList.filter(item=>item.id !== state.todoList.id)
           // return newState
     }

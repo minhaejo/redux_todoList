@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import "./Detail.css"
 import { setDeleteAll, setSelectAll } from '../features/todoSlice'
 
-function Detail({todoList}) {
+function Detail({todoId}) {
     const dispatch =useDispatch()
       //app.js 컴포넌트에서 todoList props로 전달해 todoList[0].done을 하면 값을 찾아 낼 수 있었음(true,false)
       //for each ? map? todoList의 [i]번째만큼 계속 돌려고했으나 i를 찾을 수 없다고 함
@@ -22,8 +22,8 @@ function Detail({todoList}) {
         // });
         
     }
-    const AllDelete = ({todoList})=>{
-     dispatch(setDeleteAll(todoList))
+    const AllDelete = ({todoId})=>{
+     dispatch(setDeleteAll(todoId))
     }
    
 
