@@ -42,17 +42,74 @@ const todoSlice = createSlice({
          if (item.done) {
            const newState = state.todoList.filter(todo => todo.id !== item.id)
           state.todoList = newState;
-         }else{
+         }
+         else{
            alert("체크되지 않은 항목은 삭제 할 수 없습니다.")
          }
        } ,
-         setSelectAll:(state,action) => {
-              console.log(action.payload) // 콘솔을 찍어보니 payload는 객체라는 사실을 앎 그러니까 배열을 전달하면
-                                    //객체안에 배열인 구조로 {todoList:[이런 형식이라는 말임]}
-                                    //내가 하고싶은건 배열에서의 foreach를 돌려 item들을 순회하면서 done을 true로 하고싶음
-                                    //계속 시간 쓰니까 뭔가 꼬이는 느낌임
-                                    
-         }
+
+      
+       setSelectAll: (state, action) => {
+      let actionOrder =
+        state.todoList.filter((item) => item.done === true).length ===
+        state.todoList.length // 전체 선택된상황이라면 
+          ? "allFalse" // all false로 돌려야함  전체선택된 상황이 아니라면 전체선택 되어야함 
+          : state.todoList.filter((item) => item.done === true).length === 0 || // 체크된게 없고
+            state.todoList.filter((item) => item.done === false).length > 0 ? "allTrue" : null;
+      
+            // 체크된게 하나라도 있으면 올트루 
+            
+             //3개의 목록 목록1:unckecked
+             //목록2:unckecked
+             //목록3:unckecked
+             // 언체크드 length 3
+
+              //3개의 목록 목록1:unckecked
+             //목록2:ckecked
+             //목록3:ckecked
+             // 언체크드 length 1
+
+              //3개의 목록 목록1:ckecked
+             //목록2:ckecked
+             //목록3:ckecked
+             // 언체크드 length 0 이러면 all checked 된 상황이니 all false로 넘어감 ok?
+
+
+      //트루인 아이템이 0 이거나 펄스인 아이템이 1개 이상일때
+
+      switch (actionOrder) {
+        case "allFalse": {
+          console.log(actionOrder);
+          const newState = state.todoList.map((item) => ({
+            ...item,
+            done: false,
+          }));
+
+          state.todoList = newState;
+          break;
+        }
+        
+        case "allTrue": {
+          console.log(actionOrder);
+     
+          const newState = state.todoList.map((item) => ({
+            ...item,
+            done: true,
+          }));
+
+          state.todoList = newState;
+          break;
+        }
+        default:
+          state.todoList = state.todoList;
+          break;
+      }
+    } ,
+    setDeleteAll:(state,action) => {
+           
+          // const newState =  state.todoList.filter(item=>item.id !== state.todoList.id)
+          // return newState
+    }
         }
     });
     
@@ -89,7 +146,7 @@ const todoSlice = createSlice({
       //    }
       //  }
 
-  export const {saveTodo,setCheck,setDelete,setSelectAll} = todoSlice.actions
+  export const {saveTodo,setCheck,setDelete,setSelectAll,setDeleteAll} = todoSlice.actions
 
   export const selectTodoList = state => state.todos.todoList // 이 줄 해석 안됨
 

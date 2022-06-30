@@ -28,9 +28,7 @@ function App() {
         ))
         }
         </div>  
-        <Detail 
-         todoList={todoList} 
-         
+        <Detail
         />
       <Input/>
       </div>
@@ -39,3 +37,5 @@ function App() {
 }
 
 export default App;
+
+

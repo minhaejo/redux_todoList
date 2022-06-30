@@ -27,10 +27,10 @@ const Input = () => {
     }
   return (
     <div className='input'>
-        <form onSubmit={(e)=>e.preventDefault()}>
-        <input type="text" value={inputValue} onChange={e=>setInputValue(e.target.value)} />
-        <button onClick={addTodo}>Add!</button>
-        </form>
+          <form onSubmit={(e)=>e.preventDefault()}>
+          <input type="text" value={inputValue} onChange={e=>setInputValue(e.target.value)} />
+          <button onClick={addTodo}>Add!</button>
+          </form>
     </div>
   )
 }
